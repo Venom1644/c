@@ -1,0 +1,81 @@
+1. Code First 2015
+1.1 create Student.cs model
+public class Student {
+public int id{get;set;}
+public string name {get;set;}
+public string email {get;set;}
+}
+
+1.2 create StudentDBContext.cs in Model
+public class StudentDBContext : DbContext{
+public StudentDbContext() : base("DefaultConnection") {}
+public DbSet<Student> students {get;set;}
+}
+
+1.3 Build -> Rebuild Solution
+
+1.4 now to to controller and add ASP.NET MVC controller read,write actions using Entity Model
+
+select the model created i.e Student.cs
+select context class i.e. StudentDBContext.cs
+
+check all boxes except async (use create views, use layout and libraries)
+Controller with all views automatically generated
+
+2. Code First 2022
+2.1 Select new project ASP.NET Core MVC 
+2.2 add Same model Student.cs as above
+2.3 create context class
+public class StudentDBContext : DbContext{
+public StudentDbContext(DbContextOptions options) : base(options) {}
+public DbSet<Student> students {get;set;}
+}
+
+
+2.4 Build -> Rebuild Solution
+
+2.5 now to to controller and add ASP.NET MVC controller read,write actions using Entity Model
+
+select the model created i.e Student.cs
+select context class i.e. StudentDBContext.cs
+
+check all boxes except async (use create views, use layout and libraries)
+Controller with all views automatically generated
+
+3. DBFirst using 2015
+3.1 create database in MYSQL sever 2014 copy connection name
+3.2 create mvc project in 2015
+3.3 right click on model -> Add-> New Items-> search for ado (Entity Model)-> EF design (first option)
+ -> New connection -> paste copied connection name-> below select database from that connection -> check connection-> next-> select only to table(Tick to table and check the table name you have created) and next it will create all model with context class
+3.4 rebuild solution
+3.5 now to to controller and add ASP.NET MVC controller read,write actions using Entity Model
+
+select the model created i.e Student.cs
+select context class i.e. StudentDBContext.cs
+
+check all boxes except async (use create views, use layout and libraries)
+Controller with all views automatically generated
+3.6 Download from nuget packages EntityFrameworkCore, .Design, .SqlServer, .Tools, .CodeWEbGeneration.Design, .DataAnnotations of same verion of the project 
+3.7 Open Tools -> Package Manager-> Package Manager Console
+PM> Add-Migrations "New" (here give any name in double quote)
+build successful msg get then 
+PM> update database (will create database)
+
+4. DBFirst using 2022
+4.1 create database in MYSQL sever 2014 copy connection name
+4.2 create new project ASP.NET Core MVC
+4.3 Download from nuget packages EntityFrameworkCore, .Design, .SqlServer, .Tools, .CodeWEbGeneration.Design, .DataAnnotations of same verion of the project
+4.4 Tools-> Package Manager -> Package Manager console
+PM> Scaffold-DbContext "Server=(copied name); Database=(Created db);Trusted_Connection=Ture;TrustServerCertificate=Ture;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models (will create model and context file)
+4.5 same add controller like codefirst 2022 method
+
+5. Web API 2015 using DBFirst
+follow db first approach and then create project in not mvc use WEB API project 2015 then add model same using DB first add controller using same approach but use ASP.NET WEB API controller with all actions using entity model
+if error getting rebuild solution
+
+6. WEB API 2022
+follow db first approach and then create project in not mvc use WEB API ASP Core project 2022 then add model same using DB first add controller using same approach but use ASP.NET WEB API controller with all actions using entity model
+Tools-> Package Manager -> Package Manager console
+PM> Scaffold-DbContext "Server=(copied name); Database=(Created db);Trusted_Connection=Ture;TrustServerCertificate=Ture;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models (will create model and context file)
+if error getting rebuild solution
+
